@@ -29,12 +29,23 @@ class App extends Component {
       contacts: currentState.contacts.filter((c) => c.id !== contact.id),
     }));
   };
+  filterContact = (query) => {
+    this.setState((currentState) => ({
+      contacts:
+        query === ""
+          ? currentState.contacts
+          : currentState.contacts.filter((c) =>
+              c.name.toLowerCase().includes(query.toLowerCase())
+            ),
+    }));
+  };
   render() {
     return (
       <div>
         <ListContacts
           contacts={this.state.contacts}
           onDeleteContact={this.removeContact}
+          onFilterContact={this.filterContact}
         />
       </div>
     );
